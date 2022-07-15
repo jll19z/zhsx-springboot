@@ -45,7 +45,7 @@ public class LoginController {
 
             String uuid = "token:" + UUID.randomUUID();
             System.out.println("添加redis");
-            redisTemplate.opsForValue().set(uuid,one.getId().toString(),1, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(uuid,one.getId().toString(),30, TimeUnit.MINUTES);
             System.out.println("添加redis");
             return Result.ok().data("user-token",uuid);
         }

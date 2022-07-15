@@ -36,8 +36,9 @@ private StringRedisTemplate redisTemplate;
                 return true;
                 }
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return false;
+               // return false;
+                return true; //测试接口时设置true
             }
-        }).excludePathPatterns("/login");
+        }).excludePathPatterns("/login").excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");;
     }
 }
