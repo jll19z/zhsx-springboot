@@ -1,7 +1,9 @@
 package com.ljl.zhsx.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljl.zhsx.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ljl.zhsx.pojo.query.userQuery;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    void pageQuery(Page<User> pageParam, userQuery query);
 }
