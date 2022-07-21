@@ -17,7 +17,7 @@ public class OrderVo {
     public String buyerName;
     public String buyerPhone;
     public String buyerAddress;
-    public Integer orderBuynum;
+    public Integer orderBuyNum;
     public BigDecimal orderAmount;
     private Integer orderStatus;
     private Integer payStatus;

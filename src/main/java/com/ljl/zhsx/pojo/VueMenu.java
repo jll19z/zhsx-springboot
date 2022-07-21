@@ -3,6 +3,7 @@ package com.ljl.zhsx.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author ljl
@@ -21,12 +22,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="VueMenu对象", description="")
+@ApiModel(value = "VueMenu对象", description = "")
 public class VueMenu implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-      @TableId(value = "menu_id", type = IdType.AUTO)
+    @TableId(value = "menu_id", type = IdType.AUTO)
     private Integer menuId;
 
     @TableField("authName")

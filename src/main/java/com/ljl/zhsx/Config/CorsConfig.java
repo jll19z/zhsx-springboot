@@ -19,7 +19,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true)
                 //放行哪些原始域
                 .allowedOrigins("*")
-                .allowedMethods(new String[]{"GET", "POST", "PUT", "DELETE"})
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .exposedHeaders("*");
     }

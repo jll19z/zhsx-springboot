@@ -1,9 +1,13 @@
 package com.ljl.zhsx.pojo;
 
 import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -14,7 +18,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author ljl
@@ -22,12 +26,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="ProductInfo对象", description="")
+@ApiModel(value = "ProductInfo对象", description = "")
 public class ProductInfo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-      @TableId(value = "product_id", type = IdType.AUTO)
+    @TableId(value = "product_id", type = IdType.AUTO)
     private Integer productId;
 
     @ApiModelProperty(value = "商品名称")
