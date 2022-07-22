@@ -64,6 +64,14 @@
             <version>3.3.0</version>
         </dependency>
 
+        <!-- 微信小程序登录-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.7.2</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
