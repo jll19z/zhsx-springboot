@@ -33,10 +33,7 @@ public class OrderMasterController {
     @PostMapping
     public Result saveOrder(@RequestBody OrderMaster orderMaster){
 
-        boolean t = masterService.judge(orderMaster);
-        if(t){
-            return Result.ok();
-        }
+
         return Result.error().data("ERROR","订单已存在");
     }
 
@@ -97,9 +94,12 @@ public class OrderMasterController {
     @ApiOperation(value = "新增")
     @PostMapping("/save")
     public Result save(@RequestBody OrderMaster orderMaster){
+
+        String orderNo =masterService.getOrderNo();
+        orderMaster.setOrderNo(orderNo);
         boolean flag = masterService.save(orderMaster);
         if (flag){
-            return Result.ok();
+            return Result.ok().data("orderNo",orderNo);
         }else {
             return Result.error();
         }
@@ -112,6 +112,13 @@ public class OrderMasterController {
         List<OrderVo> list = masterService.getMasterDetail(userid);
         return Result.ok().data("orderlist",list);
     }
+
+//    @GetMapping("test")
+//    public void tttt(){
+//        System.out.println("zzz");
+//        masterService.test();
+//    }
+
 
 
 }

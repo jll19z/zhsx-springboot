@@ -5,6 +5,7 @@ import com.ljl.zhsx.pojo.OrderMaster;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ljl.zhsx.pojo.VO.OrderVo;
 import com.ljl.zhsx.pojo.query.masterQuery;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -18,11 +19,14 @@ import java.util.List;
  */
 public interface OrderMasterService extends IService<OrderMaster> {
 
-    boolean judge(OrderMaster orderMaster);
 
     void pageQuery(Page<OrderMaster> pageParam, masterQuery query);
 
     boolean deleteOrder(String orderno);
-
+    
     List<OrderVo> getMasterDetail(int userid);
+
+    String getOrderNo();
+
+
 }

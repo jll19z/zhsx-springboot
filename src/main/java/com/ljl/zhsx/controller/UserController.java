@@ -58,6 +58,22 @@ public class UserController {
 
 
 
+    @PostMapping("login")
+    public Result addUser(@RequestBody User user){
+        System.out.println(user);
+        int id = userService.login(user);
+        return Result.ok().data("userid",id);
+    }
+
+    @PostMapping("save")
+    public Result save(@RequestBody User user){
+        boolean flag = userService.save(user);
+        if (flag){
+            return Result.ok().message("添加成功");
+        }else {
+            return Result.error().message("添加失败");
+        }
+    }
 
 }
 

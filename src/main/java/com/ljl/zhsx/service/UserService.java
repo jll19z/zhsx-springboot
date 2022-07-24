@@ -16,4 +16,6 @@ import com.ljl.zhsx.pojo.query.userQuery;
 public interface UserService extends IService<User> {
 
     void pageQuery(Page<User> pageParam, userQuery query);
+
+    int login(User user);
 }

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @QQ 963314043
  * @date 2022/7/13 13:02
  */
-@Configuration
+//@Configuration
 public class RequestInterceptor implements WebMvcConfigurer {
 
 @Autowired

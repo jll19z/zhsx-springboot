@@ -2,15 +2,22 @@ package com.ljl.zhsx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ljl.zhsx.pojo.OrderDetail;
 import com.ljl.zhsx.pojo.OrderMaster;
 import com.ljl.zhsx.mapper.OrderMasterMapper;
+import com.ljl.zhsx.pojo.VO.DetailVo;
 import com.ljl.zhsx.pojo.VO.OrderVo;
 import com.ljl.zhsx.pojo.query.masterQuery;
+import com.ljl.zhsx.service.OrderDetailService;
 import com.ljl.zhsx.service.OrderMasterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,20 +31,6 @@ import java.util.List;
 @Service
 public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
 
-    @Override
-    public boolean judge(OrderMaster orderMaster) {
-        QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
-        wrapper.eq("order_no",orderMaster.getOrderNo());
-        OrderMaster orderMaster1 = baseMapper.selectOne(wrapper);
-        System.out.println(orderMaster1);
-        if(!StringUtils.isEmpty(orderMaster1)){
-            System.out.println("order已存在");
-            return false;
-        }
-        baseMapper.insert(orderMaster);
-        System.out.println("创建order成功");
-        return true;
-    }
 
     @Override
     public void pageQuery(Page<OrderMaster> pageParam, masterQuery query) {
@@ -74,13 +67,75 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         baseMapper.selectPage(pageParam, wrapper);
     }
 
+    @Autowired
+    private OrderDetailService detailService;
     @Override
     public boolean deleteOrder(String orderno) {
-        return false;
+
+            QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
+            wrapper.eq("order_no",orderno);
+            QueryWrapper<OrderDetail> wrapper1 = new QueryWrapper<>();
+            wrapper1.eq("order_no",orderno);
+            detailService.remove(wrapper1);
+            int delete = baseMapper.delete(wrapper);
+            System.out.println(delete);
+            return true;
+
+
     }
 
     @Override
     public List<OrderVo> getMasterDetail(int userid) {
-        return null;
+        QueryWrapper<OrderMaster> masterQueryWrapper = new QueryWrapper<>();
+        masterQueryWrapper.eq("user_id",userid);
+        masterQueryWrapper.orderByDesc("create_time");
+
+        List<OrderMaster> orderMasters= baseMapper.selectList(masterQueryWrapper);
+
+        List<OrderVo> res = new ArrayList<>();
+
+        for(int i=0 ;i<orderMasters.size();i++){
+            OrderVo orderVo = new OrderVo();
+            OrderMaster orderMaster = orderMasters.get(i);
+            BeanUtils.copyProperties(orderMaster,orderVo);
+
+            String orderNo=orderMaster.getOrderNo();
+            QueryWrapper<OrderDetail> detailQueryWrapper = new QueryWrapper<>();
+            detailQueryWrapper.eq("order_no",orderNo);
+
+
+            List<OrderDetail> detaillist = detailService.list(detailQueryWrapper);
+
+            List<DetailVo> detailVos = new ArrayList<>();
+
+            for(int j =0;j<detaillist.size();j++){
+                OrderDetail orderDetail =detaillist.get(j);
+                DetailVo detailVo = new DetailVo();
+                BeanUtils.copyProperties(orderDetail,detailVo);
+
+                detailVos.add(detailVo);
+            }
+            orderVo.setChildren(detailVos);
+            res.add(orderVo);
+        }
+        return res;
     }
+
+
+    @Override
+    public String getOrderNo() {
+        String orderCode ="";
+        for (int i = 0; i < 6; i++) {
+            int c = (int) (1 + Math.random() * (10 - 1 + 1));
+            orderCode +=c;
+        }
+        //System.out.println(orderCode);
+        String orderNo = "D" + new Date().getTime()+ orderCode;
+        //System.out.println("订单编号"+orderNo);
+
+        return orderNo;
+    }
+
+
+
 }

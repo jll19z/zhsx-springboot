@@ -47,4 +47,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //带上门判断后的条件进行分页查询
         baseMapper.selectPage(pageParam, wrapper);
     }
+
+    @Override
+    public int login(User user) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid",user.getOpenid());
+        User uu = baseMapper.selectOne(wrapper);
+        if (!StringUtils.isEmpty(uu)){
+            System.out.println(user.getUsername()+"登录");
+            return uu.getId();
+        }
+        else {
+            if(user.getUsername().isEmpty()){
+                user.setUsername("匿名");
+            }
+            baseMapper.insert(user);
+            //System.out.println(user.getId());
+            System.out.println("新用户"+user.getUsername()+"登录");
+            return user.getId();
+        }
+
+    }
 }

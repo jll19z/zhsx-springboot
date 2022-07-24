@@ -1,7 +1,9 @@
 package com.ljl.zhsx.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljl.zhsx.pojo.OrderDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ljl.zhsx.pojo.query.detailQuery;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderDetailService extends IService<OrderDetail> {
 
+    void pageQuery(Page<OrderDetail> pageParam, detailQuery query);
+
+    void saveAndUpdate(OrderDetail orderDetail);
 }
