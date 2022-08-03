@@ -52,7 +52,7 @@ public class LoginController {
             System.out.println("添加redis");
             redisTemplate.opsForValue().set(uuid,one.getId().toString(),30, TimeUnit.MINUTES);
             System.out.println("添加redis");
-            return Result.ok().data("token",uuid);
+            return Result.ok().data("token",uuid).data("positons",one.getPositions());
         }
 
             return Result.error().message("用户不存在");

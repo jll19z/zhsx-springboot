@@ -20,4 +20,6 @@ public interface ProductInfoService extends IService<ProductInfo> {
     void pageQuery(Page<ProductInfo> pageParam, ProductInfoQuery query);
 
     List<ProductInfo> search(ProductInfoQuery query);
+
+
 }

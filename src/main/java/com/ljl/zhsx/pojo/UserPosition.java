@@ -29,7 +29,7 @@ public class UserPosition implements Serializable {
     private String positionName;
 
     private String positionInfo;
-
+    private Integer power;
     private String deleteflag;
 
 

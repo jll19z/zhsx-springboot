@@ -1,6 +1,7 @@
 package com.ljl.zhsx.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljl.zhsx.pojo.ProductInfo;
 import com.ljl.zhsx.pojo.query.ProductInfoQuery;
@@ -32,7 +33,9 @@ public class ProductInfoController {
     @ApiOperation(value = "获取所有商品信息")
     @GetMapping
     public Result getAll() {
-        List<ProductInfo> list = productInfoService.list();
+        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<>();
+        wrapper.eq("product_status",0);
+        List<ProductInfo> list = productInfoService.list(wrapper);
         return Result
                 .ok()
                 .data("productlist", list);
@@ -102,6 +105,7 @@ public class ProductInfoController {
             return Result.error();
         }
     }
+
 
     @DeleteMapping("delete/{id}")
     public Result deleteP(@PathVariable int id) {

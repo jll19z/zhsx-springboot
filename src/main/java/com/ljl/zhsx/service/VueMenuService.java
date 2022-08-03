@@ -16,5 +16,7 @@ import java.util.List;
  */
 public interface VueMenuService extends IService<VueMenu> {
 
-    List<menuTwoVO> getMenu();
+    List<menuTwoVO> getMenu(int id);
+
+
 }

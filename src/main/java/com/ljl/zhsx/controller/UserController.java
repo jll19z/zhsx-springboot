@@ -75,5 +75,23 @@ public class UserController {
         }
     }
 
+    @PostMapping("/updateById")
+    public Result updateById(@RequestBody User user) {
+        boolean flag = userService.updateById(user);
+        if (flag) {
+            return Result.ok();
+        } else {
+            return Result.error();
+        }
+    }
+
+    @DeleteMapping("delete/{id}")
+    public Result deleteP(@PathVariable int id) {
+        boolean b = userService.removeById(id);
+        if (b) {
+            return Result.ok().message("ok");
+        }
+        return Result.error();
+    }
 }
 

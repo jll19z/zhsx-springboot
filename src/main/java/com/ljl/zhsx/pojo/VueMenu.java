@@ -38,6 +38,7 @@ public class VueMenu implements Serializable {
     private String menuPath;
 
     private Integer parentid;
+    private Integer power;
 
     @TableLogic  //逻辑删除注解
     private String deleteflag;

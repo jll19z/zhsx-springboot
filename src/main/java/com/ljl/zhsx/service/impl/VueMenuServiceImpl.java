@@ -1,5 +1,6 @@
 package com.ljl.zhsx.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ljl.zhsx.pojo.VO.menuOneVO;
 import com.ljl.zhsx.pojo.VO.menuTwoVO;
 import com.ljl.zhsx.pojo.VueMenu;
@@ -26,11 +27,12 @@ public class VueMenuServiceImpl extends ServiceImpl<VueMenuMapper, VueMenu> impl
 
 
     @Override
-    public List<menuTwoVO> getMenu() {
+    public List<menuTwoVO> getMenu(int id) {
 
         List<menuTwoVO> res = new ArrayList<>();
-
-        List<VueMenu> vueMenus = baseMapper.selectList(null);
+        QueryWrapper<VueMenu> wrapper=new QueryWrapper<>();
+        wrapper.le("power",id);
+        List<VueMenu> vueMenus = baseMapper.selectList(wrapper);
 //        for(VueMenu v : vueMenus){
 //            System.out.println(v);
 //        }
@@ -58,4 +60,5 @@ public class VueMenuServiceImpl extends ServiceImpl<VueMenuMapper, VueMenu> impl
 
         return res;
     }
+
 }

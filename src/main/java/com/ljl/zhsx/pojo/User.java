@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -41,7 +42,7 @@ public class User implements Serializable {
     private String avatar;
 
     @ApiModelProperty(value = "权限")
-    private Integer power;
+    private Integer positions;
 
     @ApiModelProperty(value = "微信openid")
     private String openid;
@@ -52,5 +53,8 @@ public class User implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
 
+    @TableLogic  //逻辑删除注解
+    @ApiModelProperty(value = "删除标志 ")
+    private String deleteflag;
 
 }
