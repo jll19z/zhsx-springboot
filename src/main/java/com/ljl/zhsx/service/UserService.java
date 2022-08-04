@@ -18,4 +18,6 @@ public interface UserService extends IService<User> {
     void pageQuery(Page<User> pageParam, userQuery query);
 
     int login(User user);
+
+    User vueJudge(String openId);
 }

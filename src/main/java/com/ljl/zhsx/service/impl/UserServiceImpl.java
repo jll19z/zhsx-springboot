@@ -2,7 +2,6 @@ package com.ljl.zhsx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ljl.zhsx.pojo.ProductInfo;
 import com.ljl.zhsx.pojo.User;
 import com.ljl.zhsx.mapper.UserMapper;
 import com.ljl.zhsx.pojo.query.userQuery;
@@ -65,6 +64,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //System.out.println(user.getId());
             System.out.println("新用户"+user.getUsername()+"登录");
             return user.getId();
+        }
+
+    }
+
+    @Override
+    public User vueJudge(String openId) {
+        QueryWrapper<User> wrapper = new QueryWrapper();
+        wrapper.eq("vueopenid",openId);
+        User user = baseMapper.selectOne(wrapper);
+        if(user!=null){
+            return user;
+        }else {
+            return null;
         }
 
     }

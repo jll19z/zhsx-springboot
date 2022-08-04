@@ -1,6 +1,7 @@
 package com.ljl.zhsx.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljl.zhsx.pojo.ProductInfo;
 import com.ljl.zhsx.pojo.User;
@@ -92,6 +93,22 @@ public class UserController {
             return Result.ok().message("ok");
         }
         return Result.error();
+    }
+
+    @PostMapping("find")
+    public Result findU(@RequestBody User user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",username).eq("password",password);
+        User one = userService.getOne(wrapper);
+        if (one != null){
+            return Result.ok().data("user",one);
+        }else{
+            User user1 = new User();
+            user1.setId(0);
+            return Result.ok().data("user",user1);
+        }
     }
 }
 

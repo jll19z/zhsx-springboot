@@ -43,7 +43,8 @@ private StringRedisTemplate redisTemplate;
                 "/webjars/**",
                 "/v2/**",
                 "/swagger-ui.html/**",
-                "/zhsx/banner/getAll"
-        );;
+                "/zhsx/banner/getAll",
+                "/qrCodeFirstLogin/**"
+        );
     }
 }

@@ -47,6 +47,9 @@ public class User implements Serializable {
     @ApiModelProperty(value = "微信openid")
     private String openid;
 
+    @ApiModelProperty(value = "前台登陆的openid")
+    private String vueopenid;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
