@@ -5,6 +5,7 @@ import com.ljl.zhsx.pojo.User;
 import com.ljl.zhsx.pojo.VO.UserVO;
 import com.ljl.zhsx.pojo.VO.WXLoginVo;
 import com.ljl.zhsx.service.UserService;
+import com.ljl.zhsx.utils.RSAUtil;
 import com.ljl.zhsx.utils.Result;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,6 +35,14 @@ public class LoginController {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    @GetMapping("rsa")
+    public Result getRsaKey(){
+        String publicKeyStr = RSAUtil.getPublicKeyStr();
+
+        return Result.ok().data("pk",publicKeyStr);
+    }
+
     @PostMapping
     public Result login(@RequestBody UserVO userVO){
         String username = userVO.getUsername();
@@ -41,8 +50,10 @@ public class LoginController {
         if (username == null || password==null){
             return Result.error().message("请输入用户名和密码");
         }
+        String decrypt = RSAUtil.decrypt(password);
+        //System.out.println(decrypt);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",username).eq("password",password);
+        wrapper.eq("username",username).eq("password",decrypt);
 
         User one = userservice.getOne(wrapper);
 

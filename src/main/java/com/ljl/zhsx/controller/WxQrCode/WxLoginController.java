@@ -35,4 +35,7 @@ public class WxLoginController {
         return Result.ok().data("user",user1);
     }
 
+
+
+
 }
